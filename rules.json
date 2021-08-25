@@ -2,10 +2,11 @@
 	{
 		"pattern": "E8 ? ? ? ? 2A ? ? ? ? 72 31",
 		"offset": 1,
-		"dereference": true,
-		"dereference_nbytes": 4,
-		"dereference_offset_after": 5,
-		"dereference_type": "rel",
+		"dereference": {
+			"nbytes": 4,
+			"offset_after": 5,
+			"type": "rel"
+		},
 		"replacement": "48 C7 C0 19 01 00 00 C3"
 	},
 	{

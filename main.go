@@ -9,13 +9,16 @@ import (
 )
 
 type Rule struct {
-	Pattern                string
-	Replacement            string
-	Dereference            bool
-	DereferenceNBytes      int    `json:"dereference_nbytes"`
-	DereferenceOffsetAfter int    `json:"dereference_offset_after"`
-	DereferenceType        string `json:"dereference_type"`
-	Offset                 int
+	Pattern     string
+	Replacement string
+	Dereference *Dereference
+	Offset      int
+}
+
+type Dereference struct {
+	NBytes      int    `json:"nbytes"`
+	OffsetAfter int    `json:"offset_after"`
+	Type        string `json:"type"`
 }
 
 func to_int(ch byte) byte {
@@ -49,20 +52,20 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 			if k == len(rule.Pattern) {
 				fmt.Printf("Patching rule %d (%s) at 0x%x\n", n, rule.Pattern, i)
 				t := i
-				if rule.Dereference {
+				if rule.Dereference != nil {
 					var x int
-					for u := 0; u < rule.DereferenceNBytes; u++ {
+					for u := 0; u < rule.Dereference.NBytes; u++ {
 						x += int(buffer[t+u+rule.Offset]) << (8 * u)
 					}
-					if rule.DereferenceType == "rel" {
+					if rule.Dereference.Type == "rel" {
 						if x&(1<<31) != 0 {
 							x ^= (1 << 32) - 1
 							x *= -1
 							x -= 1
 						}
-						t += x + rule.DereferenceOffsetAfter
-					} else if rule.DereferenceType == "abs" {
-						t = x + rule.DereferenceOffsetAfter
+						t += x + rule.Dereference.OffsetAfter
+					} else if rule.Dereference.Type == "abs" {
+						t = x + rule.Dereference.OffsetAfter
 					}
 				}
 				for k = 0; k < len(rule.Replacement); k++ {
