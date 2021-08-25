@@ -52,11 +52,11 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 				if rule.Dereference {
 					var x int
 					for u := 0; u < rule.DereferenceNBytes; u++ {
-						x += int(buffer[t+u+rule.Offset]) << (8*u)
+						x += int(buffer[t+u+rule.Offset]) << (8 * u)
 					}
 					if rule.DereferenceType == "rel" {
-						if x & (1<<31) != 0 {
-							x ^= (1<<32)-1
+						if x&(1<<31) != 0 {
+							x ^= (1 << 32) - 1
 							x *= -1
 							x -= 1
 						}
