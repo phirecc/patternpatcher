@@ -66,6 +66,8 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 						t += x + rule.Dereference.OffsetAfter
 					} else if rule.Dereference.Type == "abs" {
 						t = x + rule.Dereference.OffsetAfter
+					} else {
+						return fmt.Errorf("Unknown dereference type: %s", rule.Dereference.Type)
 					}
 				}
 				for k = 0; k < len(rule.Replacement); k++ {
@@ -88,8 +90,7 @@ func patchFile(filename string, rules []Rule) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	patchBuffer(b, rules)
-	return b, nil
+	return b, patchBuffer(b, rules)
 }
 
 func main() {
