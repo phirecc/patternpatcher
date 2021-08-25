@@ -16,9 +16,9 @@ type Rule struct {
 }
 
 type Dereference struct {
-	NBytes      int    `json:"nbytes"`
-	OffsetAfter int    `json:"offset_after"`
-	Type        string `json:"type"`
+	NBytes      int `json:"nbytes"`
+	OffsetAfter int `json:"offset_after"`
+	Type        string
 }
 
 func to_int(ch byte) byte {
