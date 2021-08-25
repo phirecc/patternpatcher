@@ -21,6 +21,8 @@ type Rule struct {
 func to_int(ch byte) byte {
 	if ch >= 'A' && ch <= 'F' {
 		return byte(ch - 'A' + 10)
+	} else if ch >= 'a' && ch <= 'f' {
+		return byte(ch - 'a' + 10)
 	} else {
 		return byte(ch - '0')
 	}
