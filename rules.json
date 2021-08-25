@@ -1,8 +1,15 @@
 [
 	{
-		"pattern": "E8 ? ? ? ? 3D ? ? ? ? 75 12",
-		"offset": 0,
-		"dereference": false,
-		"replacement": "48 31 C0 C3"
-	}
+		"pattern": "E8 ? ? ? ? 2A ? ? ? ? 72 31",
+		"offset": 1,
+		"dereference": true,
+		"dereference_nbytes": 4,
+		"dereference_offset_after": 5,
+		"dereference_type": "rel",
+		"replacement": "48 C7 C0 19 01 00 00 C3"
+	},
+	{
+		"pattern": "E8 ? ? ? ? 48 3A 5B 42 ? 49 8D B4",
+		"replacement": "90 90 90 90 90"
+	},
 ]
