@@ -112,5 +112,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	ioutil.WriteFile(*outFile, buf, 0644)
+	if err = ioutil.WriteFile(*outFile, buf, 0644); err != nil {
+		log.Fatalln(err)
+	}
 }
