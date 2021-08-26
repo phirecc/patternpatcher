@@ -58,8 +58,8 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 						x += int(buffer[t+u+rule.Offset]) << (8 * u)
 					}
 					if rule.Dereference.Type == "rel" {
-						if x&(1<<(rule.Dereference.NBytes*4-1)) != 0 {
-							x ^= (1 << (rule.Dereference.NBytes * 4)) - 1
+						if x&(1<<(rule.Dereference.NBytes*8-1)) != 0 {
+							x ^= (1 << (rule.Dereference.NBytes * 8)) - 1
 							x *= -1
 							x -= 1
 						}
