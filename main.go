@@ -9,6 +9,7 @@ import (
 )
 
 type Rule struct {
+	Desc        string
 	Pattern     string
 	Replacement string
 	Dereference *Dereference
@@ -50,7 +51,7 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 				}
 			}
 			if k == len(rule.Pattern) {
-				fmt.Printf("Patching rule %d (%s) at 0x%x\n", n, rule.Pattern, i)
+				fmt.Printf("Patching rule %d: \"%s\" (%s) at 0x%x\n", n, rule.Desc, rule.Pattern, i)
 				t := i
 				if rule.Dereference != nil {
 					var x int
@@ -107,7 +108,6 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	buf, err := patchFile(*targetFile, rules)
 	if err != nil {
 		log.Fatalln(err)
