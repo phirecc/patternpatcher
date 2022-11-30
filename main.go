@@ -51,7 +51,6 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 				}
 			}
 			if k == len(rule.Pattern) {
-				fmt.Printf("Patching rule %d: \"%s\" (%s) at 0x%x\n", n, rule.Desc, rule.Pattern, i)
 				t := i
 				if rule.Dereference != nil {
 					var x int
@@ -71,6 +70,7 @@ func patchBuffer(buffer []byte, rules []Rule) error {
 						return fmt.Errorf("Unknown dereference type: %s", rule.Dereference.Type)
 					}
 				}
+				fmt.Printf("Patching rule %d: \"%s\" (%s) at 0x%x\n", n, rule.Desc, rule.Pattern, t)
 				for k = 0; k < len(rule.Replacement); k++ {
 					if rule.Replacement[k] == ' ' {
 						t++
