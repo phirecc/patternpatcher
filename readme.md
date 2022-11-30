@@ -1,5 +1,16 @@
 # Patternpatcher
-Patches binaries using IDA-Style signatures and rules configured in JSON
+Tool that patches binaries using a set of rules with IDA-Style signatures
+
+```
+$ patternpatcher
+Usage of patternpatcher:
+  -out string
+    	Output file (default "patched.out")
+  -rules string
+    	The file containing patching rules (default "rules.json")
+  -target string
+    	The file to patch
+```
 
 Supports:
 - Regular bytepatch
@@ -8,4 +19,4 @@ Supports:
 	- Relative (e.g. rel32 call)
 
 
-See `rules.json` for an example
+See `rules.json` for an example config

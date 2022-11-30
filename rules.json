@@ -1,5 +1,6 @@
 [
 	{
+		"desc": "Example description!",
 		"pattern": "E8 ? ? ? ? 2A ? ? ? ? 72 31",
 		"offset": 1,
 		"dereference": {
@@ -12,5 +13,5 @@
 	{
 		"pattern": "E8 ? ? ? ? 48 3A 5B 42 ? 49 8D B4",
 		"replacement": "90 90 90 90 90"
-	},
+	}
 ]
